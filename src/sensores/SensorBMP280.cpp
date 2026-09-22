@@ -12,11 +12,6 @@ bool SensorBMP280::iniciar() {
         return false; // sensor não respondeu no endereço I2C informado
     }
  
-    /*bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,
-                     Adafruit_BMP280::SAMPLING_X2,   // temperatura (usada internamente na compensação)
-                     Adafruit_BMP280::SAMPLING_X16,  // pressão
-                     Adafruit_BMP280::FILTER_X16,
-                     Adafruit_BMP280::STANDBY_MS_500);/**/
     return true;
 }
 
