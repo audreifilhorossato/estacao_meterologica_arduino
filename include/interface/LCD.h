@@ -7,5 +7,4 @@ class LCD {
     public:
         void iniciar();
         void mostrarDados(const Dados& dados);
-        void mostrarErro(const char* mensagem);
 };

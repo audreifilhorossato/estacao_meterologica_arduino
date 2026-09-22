@@ -1,29 +1,35 @@
 #pragma once
 #include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_BMP280.h>
 
-class SensorLM35 {
+
+class SensorBMP280 {
     public:
-        SensorLM35(
-            uint8_t pino,
+        SensorBMP280(
+            uint8_t endereco_i2c,
             float peso,
             float intercept, 
             uint16_t quantidade_amostras = 20
         );
 
-        void iniciar();
-        float ler_temperatura() const;
-        float ler_media() const;
+        bool iniciar();
+        float ler_pressao();
+        float ler_altitude();
+        float ler_media_pressao();
+        float ler_media_altitude();
 
         void definir_calibracao(
             float novo_peso,
             float novo_intercept
         );
     private:
-        uint8_t pino;
+        Adafruit_BMP280 bmp;
+
+        uint8_t endereco_i2c;
         uint16_t quantidade_amostras;
 
         float peso;
         float intercept;
 
 };
-

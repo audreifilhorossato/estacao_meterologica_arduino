@@ -15,17 +15,7 @@ void LCD::mostrarDados(const Dados& dados) {
     lcd.print("Temp: ");
     lcd.print(dados.temperatura);
     lcd.setCursor(0, 1);
-    lcd.print("Pressao: ");
+    lcd.print("Pres: ");
     lcd.print(dados.pressao);
-    delay(500);
-    lcd.print("Umidade: ");
-    lcd.print(dados.umidade);
-    lcd.setCursor(0, 1);
-    lcd.print("Luz: ");
-    lcd.print(dados.luminosidade);
-    delay(500);
 }
 
-void LCD::mostrarErro(const char* mensagem) {
-    // Exibir a mensagem de erro no LCD.
-}
