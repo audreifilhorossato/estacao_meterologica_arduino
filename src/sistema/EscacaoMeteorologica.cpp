@@ -17,6 +17,7 @@ EstacaoMeteorologica::EstacaoMeteorologica(
         quantidade_amostras
       ),
       sensor_bmp280(
+        endereco_i2c,
         peso_bmp280,
         intercept_bmp280,
         quantidade_amostras
@@ -33,6 +34,7 @@ void EstacaoMeteorologica::iniciar() {
     delay(100);
 
     sensor_lm35.iniciar();
+    sensor_bmp280.iniciar();
     display.iniciar();
 
     atualizar_dados();
@@ -57,6 +59,7 @@ void EstacaoMeteorologica::executar() {
 void EstacaoMeteorologica::atualizar_dados() {
     dados.temperatura = sensor_lm35.ler_temperatura();
     dados.pressao = sensor_bmp280.ler_pressao();
+    dados.altitude = sensor_bmp280.ler_altitude();
 }
 
 const Dados& EstacaoMeteorologica::obter_dados() const {

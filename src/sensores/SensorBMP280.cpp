@@ -12,11 +12,11 @@ bool SensorBMP280::iniciar() {
         return false; // sensor não respondeu no endereço I2C informado
     }
  
-    bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,
+    /*bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,
                      Adafruit_BMP280::SAMPLING_X2,   // temperatura (usada internamente na compensação)
                      Adafruit_BMP280::SAMPLING_X16,  // pressão
                      Adafruit_BMP280::FILTER_X16,
-                     Adafruit_BMP280::STANDBY_MS_500);
+                     Adafruit_BMP280::STANDBY_MS_500);/**/
     return true;
 }
 
@@ -33,7 +33,7 @@ float SensorBMP280::ler_media_pressao() {
 
 float SensorBMP280::ler_pressao(){
     float leitura = ler_media_pressao();
-    return peso * leitura + intercept; 
+    return (peso * leitura + intercept) /101325; 
 }
 
 float SensorBMP280::ler_media_altitude() {
@@ -49,7 +49,7 @@ float SensorBMP280::ler_media_altitude() {
 
 float SensorBMP280::ler_altitude(){
     float leitura = ler_media_altitude();
-    return peso * leitura + intercept; 
+    return (peso * leitura + intercept); 
 }
 
 void SensorBMP280::definir_calibracao(float novo_peso,float novo_intercept){

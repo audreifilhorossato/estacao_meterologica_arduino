@@ -10,6 +10,8 @@ void LCD::iniciar() {
 }
 
 void LCD::mostrarDados(const Dados& dados) {
+    
+    delay(1000);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
@@ -17,5 +19,11 @@ void LCD::mostrarDados(const Dados& dados) {
     lcd.setCursor(0, 1);
     lcd.print("Pres: ");
     lcd.print(dados.pressao);
+
+    delay(1000);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Alt: ");
+    lcd.print(dados.altitude);
 }
 
