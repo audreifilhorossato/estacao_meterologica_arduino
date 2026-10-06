@@ -7,12 +7,12 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 void LCD::iniciar() {
     lcd.init();
     lcd.backlight();
+    lcd.clear();
 }
 
 void LCD::mostrarDados(const Dados& dados) {
     
     delay(1000);
-    lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
     lcd.print(dados.temperatura);
@@ -21,9 +21,11 @@ void LCD::mostrarDados(const Dados& dados) {
     lcd.print(dados.pressao);
 
     delay(1000);
-    lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Alt: ");
     lcd.print(dados.altitude);
+    lcd.setCursor(0, 1);
+    lcd.print("Lum: ");
+    lcd.print(dados.luminosidade);
 }
 
