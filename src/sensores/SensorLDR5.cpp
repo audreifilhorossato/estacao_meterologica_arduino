@@ -26,9 +26,10 @@ float SensorLDR5::ler_media() const {
 }
 
 float SensorLDR5::ler_luminosidade() const {
-    float leitura = constrain(ler_media(), 1.0f, ADC_MAX - 1.0f);
-    float r_ldr = RESISTOR * (ADC_MAX - leitura) / leitura;   
-    return pow(10, peso * log10(r_ldr) + intercept);          
+    float tensao = ler_media() * VREF / ADC_MAX;          
+    tensao = constrain(tensao, 0.001f, VREF - 0.001f);    
+    float r_ldr = RESISTOR * tensao / (VCC - tensao);     
+    return pow(10, peso * log10(r_ldr) + intercept);
 }
 
 void SensorLDR5::definir_calibracao(float novo_peso,float novo_intercept){

@@ -24,6 +24,9 @@ class SensorLDR5 {
         static constexpr float RESISTOR = 10000.0f; 
         static constexpr float ADC_MAX  = 1023.0f;  
 
+        static constexpr float VREF = 1.1f;    
+        static constexpr float VCC = 3.3f; 
+
         uint8_t pino;
         uint16_t quantidade_amostras;
 
