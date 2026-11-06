@@ -46,8 +46,3 @@ float SensorBMP280::ler_altitude(){
     float leitura = ler_media_altitude();
     return (peso * leitura + intercept); 
 }
-
-void SensorBMP280::definir_calibracao(float novo_peso,float novo_intercept){
-    peso = novo_peso;
-    intercept = novo_intercept;
-}

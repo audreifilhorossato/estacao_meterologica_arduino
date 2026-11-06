@@ -29,8 +29,3 @@ float SensorLM35::ler_temperatura() const {
     float leitura = ler_media();
     return peso * leitura + intercept;
 }
-
-void SensorLM35::definir_calibracao(float novo_peso,float novo_intercept){
-    peso = novo_peso;
-    intercept = novo_intercept;
-}

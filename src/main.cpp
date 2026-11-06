@@ -28,8 +28,7 @@ EstacaoMeteorologica estacao(
     // A1,                  // DHT22 (desativado)
     // PESO_DHT22,          // DHT22 (desativado)
     // INTERCEPT_DHT22,     // DHT22 (desativado)
-    20,                  // n de amostras
-    1000                 // intervalo
+    20                   // n de amostras
 );
 
 void setup() {

@@ -13,11 +13,6 @@ class SensorLM35 {
         void iniciar();
         float ler_temperatura() const;
         float ler_media() const;
-
-        void definir_calibracao(
-            float novo_peso,
-            float novo_intercept
-        );
     private:
         uint8_t pino;
         uint16_t quantidade_amostras;

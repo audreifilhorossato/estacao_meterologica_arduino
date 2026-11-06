@@ -18,11 +18,6 @@ class SensorBMP280 {
         float ler_altitude();
         float ler_media_pressao();
         float ler_media_altitude();
-
-        void definir_calibracao(
-            float novo_peso,
-            float novo_intercept
-        );
     private:
         Adafruit_BMP280 bmp;
 

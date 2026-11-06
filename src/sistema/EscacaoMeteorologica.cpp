@@ -21,8 +21,7 @@ EstacaoMeteorologica::EstacaoMeteorologica(
     // float peso_dht22,        // DHT22 desativado
     // float intercept_dht22,   // DHT22 desativado
 
-    uint16_t quantidade_amostras,
-    unsigned long intervalo_leitura
+    uint16_t quantidade_amostras
 )
     :sensor_lm35(
         pino_lm35,
@@ -53,9 +52,7 @@ EstacaoMeteorologica::EstacaoMeteorologica(
       // ),
 
       display(),
-      dados{},
-      momento_ultima_leitura(0),
-      intervalo_leitura(intervalo_leitura) {
+      dados{} {
 }
 
 void EstacaoMeteorologica::iniciar() {
@@ -74,19 +71,9 @@ void EstacaoMeteorologica::iniciar() {
 
     atualizar_dados();
     display.mostrarDados(dados);
-
-    momento_ultima_leitura = millis();
 }
 
 void EstacaoMeteorologica::executar() {
-    unsigned long momento_atual = millis();
-
-    if ( momento_atual - momento_ultima_leitura < intervalo_leitura) {
-        return;
-    }
-
-    momento_ultima_leitura = momento_atual;
-
     atualizar_dados();
 
     // acende o LED quando a luminosidade ficar abaixo do limiar

@@ -29,8 +29,7 @@ class EstacaoMeteorologica {
             // float peso_dht22,        // DHT22 desativado
             // float intercept_dht22,   // DHT22 desativado
 
-            uint16_t quantidade_amostras = 20,
-            unsigned long intervalo_leitura = 1000
+            uint16_t quantidade_amostras = 20
         );
 
         void iniciar();
@@ -46,9 +45,6 @@ class EstacaoMeteorologica {
 
         LCD display;
         Dados dados;
-
-        unsigned long momento_ultima_leitura;
-        unsigned long intervalo_leitura;
 
         void atualizar_dados();
 };

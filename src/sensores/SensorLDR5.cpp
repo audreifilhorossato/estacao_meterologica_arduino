@@ -31,8 +31,3 @@ float SensorLDR5::ler_luminosidade() const {
     float r_ldr = RESISTOR * tensao / (VCC - tensao);     
     return pow(10, peso * log10(r_ldr) + intercept);
 }
-
-void SensorLDR5::definir_calibracao(float novo_peso,float novo_intercept){
-    peso = novo_peso;
-    intercept = novo_intercept;
-}
