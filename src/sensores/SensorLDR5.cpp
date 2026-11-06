@@ -3,9 +3,9 @@
 
 SensorLDR5::SensorLDR5(uint8_t pino, float peso, float intercept, uint16_t quantidade_amostras)
     : pino(pino),
+    quantidade_amostras(quantidade_amostras),
     peso(peso),
-    intercept(intercept),
-    quantidade_amostras(quantidade_amostras)
+    intercept(intercept)
 {}
 
 void SensorLDR5::iniciar() {

@@ -1,3 +1,5 @@
+// DHT22 desativado para testes: descomente o bloco abaixo para usar o sensor novamente.
+/*
 #pragma once
 #include <Arduino.h>
 #include <DHT.h> 
@@ -12,10 +14,11 @@ class SensorDHT22 {
         );
 
         void iniciar();
-        float ler_umidade() const;
-        float ler_media() const;
+        float ler_umidade();
+        float ler_media();
 
     private:
+        DHT dht;
 
         uint8_t pino;
         uint16_t quantidade_amostras;
@@ -24,4 +27,4 @@ class SensorDHT22 {
         float intercept;
 
 };
-,
+*/

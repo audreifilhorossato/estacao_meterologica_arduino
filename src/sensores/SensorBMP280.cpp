@@ -2,9 +2,9 @@
 
 SensorBMP280::SensorBMP280( uint8_t endereco_i2c, float peso, float intercept, uint16_t quantidade_amostras)
     : endereco_i2c(endereco_i2c),
+    quantidade_amostras(quantidade_amostras),
     peso(peso),
-    intercept(intercept),
-    quantidade_amostras(quantidade_amostras)
+    intercept(intercept)
 {}
 
 bool SensorBMP280::iniciar() {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "modelos/Dados.h"
+#include "modelos/dados.h"
 
 class LCD {
     public:
