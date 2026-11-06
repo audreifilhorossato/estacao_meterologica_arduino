@@ -14,13 +14,7 @@ class SensorLDR5 {
         float ler_luminosidade() const;
         float ler_media() const;
 
-        void definir_calibracao(
-            float novo_peso,
-            float novo_intercept
-        );
-
     private:
-
         static constexpr float RESISTOR = 10000.0f; 
         static constexpr float ADC_MAX  = 1023.0f;  
 

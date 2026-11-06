@@ -13,27 +13,41 @@ EstacaoMeteorologica::EstacaoMeteorologica(
     float peso_ldr5,
     float intercept_ldr5,
 
+    uint8_t pino_dht22,
+    float peso_dht22,
+    float intercept_dht22,
+
     uint16_t quantidade_amostras,
     unsigned long intervalo_leitura
 )
-    : sensor_lm35(
+    :sensor_lm35(
         pino_lm35,
         peso_lm35,
         intercept_lm35,
         quantidade_amostras
       ),
+
       sensor_bmp280(
         endereco_i2c,
         peso_bmp280,
         intercept_bmp280,
         quantidade_amostras
       ),
+
       sensor_ldr5(
         pino_ldr5,
         peso_ldr5,
         intercept_ldr5,
         quantidade_amostras
       ),
+
+      sensor_dht22(
+        pino_dht22,
+        peso_dht22,
+        intercept_dht22,
+        quantidade_amostras
+      ),
+
       display(),
       dados{},
       momento_ultima_leitura(0),
@@ -48,6 +62,7 @@ void EstacaoMeteorologica::iniciar() {
     sensor_lm35.iniciar();
     sensor_bmp280.iniciar();
     sensor_ldr5.iniciar();
+    sensor_dht22.iniciar();
     display.iniciar();
 
     atualizar_dados();
@@ -74,6 +89,7 @@ void EstacaoMeteorologica::atualizar_dados() {
     dados.pressao = sensor_bmp280.ler_pressao();
     dados.altitude = sensor_bmp280.ler_altitude();
     dados.luminosidade = sensor_ldr5.ler_luminosidade();
+    dados.umidade = sensor_dht22.ler_umidade();
 }
 
 const Dados& EstacaoMeteorologica::obter_dados() const {

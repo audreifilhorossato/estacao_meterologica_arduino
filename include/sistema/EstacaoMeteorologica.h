@@ -5,8 +5,10 @@
 #include "sensores/SensorLM35.h"
 #include "sensores/SensorBMP280.h"
 #include "sensores/SensorLDR5.h"
+#include "sensores/SensorDHT22.h"
 #include "interface/LCD.h"
 #include "modelos/dados.h"
+
 
 class EstacaoMeteorologica {
     public:
@@ -23,6 +25,10 @@ class EstacaoMeteorologica {
             float peso_ldr5,
             float intercept_ldr5,
 
+            uint8_t pino_dht22,
+            float peso_dht22,
+            float intercept_dht22,
+
             uint16_t quantidade_amostras = 20,
             unsigned long intervalo_leitura = 1000
         );
@@ -36,7 +42,7 @@ class EstacaoMeteorologica {
         SensorLM35 sensor_lm35;
         SensorBMP280 sensor_bmp280;
         SensorLDR5 sensor_ldr5;
-
+        SensorDHT22 sensor_dht22;
 
         LCD display;
         Dados dados;
