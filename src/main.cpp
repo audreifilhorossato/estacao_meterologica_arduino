@@ -16,13 +16,13 @@ constexpr float INTERCEPT_LDR5 = 9.97262783;
 
 
 EstacaoMeteorologica estacao(
-    A0,                  // LM35
+    A1,                  // LM35 (temperatura)
     PESO_LM35,           // LM35
     INTERCEPT_LM35,      // LM35
-    0x76,                // BMP280
+    0x76,                // BMP280 (I2C: SDA=A4, SCL=A5)
     PESO_BMP280,         // BMP280
     INTERCEPT_BMP280,    // BMP280
-    A2,                  // LDR5
+    A0,                  // LDR5 (luminosidade)
     PESO_LDR5,           // LDR5
     INTERCEPT_LDR5,      // LDR5
     // A1,                  // DHT22 (desativado)
