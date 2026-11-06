@@ -1,5 +1,9 @@
 #include "sistema/EstacaoMeteorologica.h"
 
+// LED de aviso de pouca luz
+constexpr uint8_t PINO_LED = 2;                   // pino digital 2
+constexpr float LIMIAR_LUMINOSIDADE = 100.0f;     // abaixo desse valor o LED acende (ajuste aqui)
+
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
     float peso_lm35,
@@ -65,6 +69,9 @@ void EstacaoMeteorologica::iniciar() {
     // sensor_dht22.iniciar();  // DHT22 desativado
     display.iniciar();
 
+    pinMode(PINO_LED, OUTPUT);
+    digitalWrite(PINO_LED, LOW);
+
     atualizar_dados();
     display.mostrarDados(dados);
 
@@ -81,6 +88,14 @@ void EstacaoMeteorologica::executar() {
     momento_ultima_leitura = momento_atual;
 
     atualizar_dados();
+
+    // acende o LED quando a luminosidade ficar abaixo do limiar
+    if (dados.luminosidade < LIMIAR_LUMINOSIDADE) {
+        digitalWrite(PINO_LED, HIGH);
+    } else {
+        digitalWrite(PINO_LED, LOW);
+    }
+
     display.mostrarDados(dados);
 }
 
