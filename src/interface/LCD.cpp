@@ -10,9 +10,7 @@ void LCD::iniciar() {
     lcd.clear();
 }
 
-void LCD::mostrarDados(const Dados& dados, bool segunda_unidade) {
-    
-    delay(1000);
+void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
@@ -32,8 +30,9 @@ void LCD::mostrarDados(const Dados& dados, bool segunda_unidade) {
         lcd.print(dados.pressao.atm);
         lcd.print(" atm");
     }
+}
 
-    delay(1000);
+void LCD::mostrarTela2(const Dados& dados, bool segunda_unidade) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Alt: ");

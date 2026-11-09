@@ -1,34 +1,8 @@
 #include "sistema/EstacaoMeteorologica.h"
 
-// LED de aviso de pouca luz
-constexpr uint8_t PINO_LED = 2;                   // pino digital 2
-constexpr float LIMIAR_LUMINOSIDADE = 100.0f;     // em lux: abaixo desse valor o LED acende (ajuste aqui)
-
-// Botão que troca as unidades (ligado entre o D1 e o GND)
+constexpr uint8_t PINO_LED = 2;
 constexpr uint8_t PINO_BOTAO = 1;
-
-// false = primeira unidade (°C, atm, m, lux) | true = segunda unidade (°F, bar, pés, fc)
-volatile bool segunda_unidade = false;
-
-// Troca a unidade quando o botão é apertado.
-void ao_apertar_botao() {
-    static unsigned long ultimo_aperto = 0;
-    unsigned long agora = millis();
-
-    if (agora - ultimo_aperto > 250) {   // ignora o "tremido" do botão (debounce)
-        segunda_unidade = !segunda_unidade;
-        ultimo_aperto = agora;
-    }
-}
-
-// Interrupção do D1 (no Uno o D1 fica no grupo PCINT2, pinos D0 a D7).
-// Ela é chamada sozinha quando o pino muda, assim o aperto não se perde
-// mesmo durante os delays do display.
-ISR(PCINT2_vect) {
-    if (digitalRead(PINO_BOTAO) == LOW) {   // LOW = botão apertado
-        ao_apertar_botao();
-    }
-}
+constexpr float LIMIAR_LUMINOSIDADE = 100.0f;   // lux
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
@@ -43,9 +17,10 @@ EstacaoMeteorologica::EstacaoMeteorologica(
     float peso_ldr5,
     float intercept_ldr5,
 
-    // uint8_t pino_dht22,      // DHT22 desativado
-    // float peso_dht22,        // DHT22 desativado
-    // float intercept_dht22,   // DHT22 desativado
+    // DHT22 desativado
+    // uint8_t pino_dht22,
+    // float peso_dht22,
+    // float intercept_dht22,
 
     uint16_t quantidade_amostras
 )
@@ -70,7 +45,7 @@ EstacaoMeteorologica::EstacaoMeteorologica(
         quantidade_amostras
       ),
 
-      // sensor_dht22(            // DHT22 desativado
+      // sensor_dht22(
       //   pino_dht22,
       //   peso_dht22,
       //   intercept_dht22,
@@ -78,7 +53,8 @@ EstacaoMeteorologica::EstacaoMeteorologica(
       // ),
 
       display(),
-      dados{} {
+      dados{},
+      segunda_unidade(false) {
 }
 
 void EstacaoMeteorologica::iniciar() {
@@ -89,31 +65,42 @@ void EstacaoMeteorologica::iniciar() {
     sensor_lm35.iniciar();
     sensor_bmp280.iniciar();
     sensor_ldr5.iniciar();
-    // sensor_dht22.iniciar();  // DHT22 desativado
+    // sensor_dht22.iniciar();
     display.iniciar();
 
     pinMode(PINO_LED, OUTPUT);
     digitalWrite(PINO_LED, LOW);
 
     pinMode(PINO_BOTAO, INPUT_PULLUP);
-    PCICR  |= (1 << PCIE2);     // liga as interrupções do grupo D0 a D7
-    PCMSK2 |= (1 << PCINT17);   // só do pino D1
-
-    atualizar_dados();
-    display.mostrarDados(dados, segunda_unidade);
 }
 
 void EstacaoMeteorologica::executar() {
     atualizar_dados();
 
-    // acende o LED quando a luminosidade ficar abaixo do limiar
     if (dados.luminosidade.lux < LIMIAR_LUMINOSIDADE) {
         digitalWrite(PINO_LED, HIGH);
     } else {
         digitalWrite(PINO_LED, LOW);
     }
 
-    display.mostrarDados(dados, segunda_unidade);
+    display.mostrarTela1(dados, segunda_unidade);
+    esperar(1000);
+
+    display.mostrarTela2(dados, segunda_unidade);
+    esperar(1000);
+}
+
+// Espera o tempo pedido, mas continua olhando o botao
+void EstacaoMeteorologica::esperar(unsigned long tempo) {
+    unsigned long inicio = millis();
+
+    while (millis() - inicio < tempo) {
+        if (digitalRead(PINO_BOTAO) == LOW) {
+            segunda_unidade = !segunda_unidade;
+            delay(50);
+            while (digitalRead(PINO_BOTAO) == LOW) {}   // espera soltar o botao
+        }
+    }
 }
 
 void EstacaoMeteorologica::atualizar_dados() {
@@ -121,7 +108,7 @@ void EstacaoMeteorologica::atualizar_dados() {
     dados.pressao = sensor_bmp280.ler_pressao();
     dados.altitude = sensor_bmp280.ler_altitude();
     dados.luminosidade = sensor_ldr5.ler_luminosidade();
-    // dados.umidade = sensor_dht22.ler_umidade();  // DHT22 desativado
+    // dados.umidade = sensor_dht22.ler_umidade();
 }
 
 const Dados& EstacaoMeteorologica::obter_dados() const {

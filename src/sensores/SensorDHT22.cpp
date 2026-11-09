@@ -1,4 +1,4 @@
-// DHT22 desativado para testes: descomente o bloco abaixo para usar o sensor novamente.
+// DHT22 desativado
 /*
 #include "sensores/SensorDHT22.h"
 
@@ -15,7 +15,6 @@ void SensorDHT22::iniciar() {
 }
 
 float SensorDHT22::ler_media() {
-    // o DHT22 só atualiza a leitura a cada ~2 s, então não adianta tirar várias amostras seguidas
     return dht.readHumidity();
 }
 

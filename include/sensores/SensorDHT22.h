@@ -1,4 +1,4 @@
-// DHT22 desativado para testes: descomente o bloco abaixo para usar o sensor novamente.
+// DHT22 desativado
 /*
 #pragma once
 #include <Arduino.h>

@@ -31,8 +31,8 @@ Pressao SensorBMP280::ler_pressao(){
     float pascal = peso * leitura + intercept;
 
     Pressao p;
-    p.atm = pascal / 101325.0f;   // 1 atm = 101325 Pa
-    p.bar = pascal / 100000.0f;   // 1 bar = 100000 Pa
+    p.atm = pascal / 101325.0f;
+    p.bar = pascal / 100000.0f;
     return p;
 }
 
@@ -52,6 +52,6 @@ Altitude SensorBMP280::ler_altitude(){
 
     Altitude a;
     a.metros = peso * leitura + intercept;
-    a.pes = a.metros * 3.28084f;   // 1 m = 3,28084 pés
+    a.pes = a.metros * 3.28084f;
     return a;
 }

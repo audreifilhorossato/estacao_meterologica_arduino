@@ -32,6 +32,6 @@ Luminosidade SensorLDR5::ler_luminosidade() const {
 
     Luminosidade l;
     l.lux = pow(10, peso * log10(r_ldr) + intercept);
-    l.footcandle = l.lux / 10.764f;   // 1 fc = 10,764 lux
+    l.footcandle = l.lux / 10.764f;
     return l;
 }

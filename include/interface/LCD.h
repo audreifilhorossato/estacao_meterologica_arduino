@@ -6,5 +6,6 @@
 class LCD {
     public:
         void iniciar();
-        void mostrarDados(const Dados& dados, bool segunda_unidade);
+        void mostrarTela1(const Dados& dados, bool segunda_unidade);
+        void mostrarTela2(const Dados& dados, bool segunda_unidade);
 };
