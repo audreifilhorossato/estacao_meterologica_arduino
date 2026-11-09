@@ -8,7 +8,6 @@ class SensorDHT22 {
             uint8_t pino,
             float peso,
             float intercept, 
-            uint16_t quantidade_amostras = 20
         );
 
         void iniciar();
@@ -18,7 +17,6 @@ class SensorDHT22 {
         DHT dht;
 
         uint8_t pino;
-        uint16_t quantidade_amostras;
 
         float peso;
         float intercept;

@@ -1,9 +1,8 @@
 #include "sensores/SensorDHT22.h"
 
-SensorDHT22::SensorDHT22(uint8_t pino, float peso, float intercept, uint16_t quantidade_amostras)
+SensorDHT22::SensorDHT22(uint8_t pino, float peso, float intercept)
     : dht(pino, DHT22),
     pino(pino),
-    quantidade_amostras(quantidade_amostras),
     peso(peso),
     intercept(intercept)
 {}

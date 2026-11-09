@@ -1,0 +1,10 @@
+{
+	"autodeskProduct": "Fusion",
+	"type": "script",
+	"author": "",
+	"description": {
+		"": "Gera a caixa de acrílico da Estação Meteorológica (peças para corte a laser)"
+	},
+	"supportedOS": "windows|mac",
+	"editEnabled": true
+}

@@ -1,7 +1,7 @@
 #include "sistema/EstacaoMeteorologica.h"
 
 constexpr uint8_t PINO_LED = 2;
-constexpr uint8_t PINO_BOTAO = 4;
+constexpr uint8_t PINO_BOTAO = 3;
 constexpr float LIMIAR_LUMINOSIDADE = 200.0f;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
