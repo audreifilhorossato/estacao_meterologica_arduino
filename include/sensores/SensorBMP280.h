@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_BMP280.h>
+#include "modelos/dados.h"
 
 
 class SensorBMP280 {
@@ -14,8 +15,8 @@ class SensorBMP280 {
         );
 
         bool iniciar();
-        float ler_pressao();
-        float ler_altitude();
+        Pressao ler_pressao();
+        Altitude ler_altitude();
         float ler_media_pressao();
         float ler_media_altitude();
     private:

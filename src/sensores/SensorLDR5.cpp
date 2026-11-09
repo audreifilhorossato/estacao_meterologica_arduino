@@ -25,9 +25,13 @@ float SensorLDR5::ler_media() const {
     return static_cast<float>(soma) / quantidade_amostras;
 }
 
-float SensorLDR5::ler_luminosidade() const {
+Luminosidade SensorLDR5::ler_luminosidade() const {
     float tensao = ler_media() * VREF / ADC_MAX;          
     tensao = constrain(tensao, 0.001f, VREF - 0.001f);    
     float r_ldr = RESISTOR * tensao / (VCC - tensao);     
-    return pow(10, peso * log10(r_ldr) + intercept);
+
+    Luminosidade l;
+    l.lux = pow(10, peso * log10(r_ldr) + intercept);
+    l.footcandle = l.lux / 10.764f;   // 1 fc = 10,764 lux
+    return l;
 }

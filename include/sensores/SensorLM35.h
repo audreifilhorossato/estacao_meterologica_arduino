@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino.h>
+#include "modelos/dados.h"
 
 class SensorLM35 {
     public:
@@ -11,7 +12,7 @@ class SensorLM35 {
         );
 
         void iniciar();
-        float ler_temperatura() const;
+        Temperatura ler_temperatura() const;
         float ler_media() const;
     private:
         uint8_t pino;

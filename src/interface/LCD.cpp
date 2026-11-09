@@ -10,24 +10,48 @@ void LCD::iniciar() {
     lcd.clear();
 }
 
-void LCD::mostrarDados(const Dados& dados) {
+void LCD::mostrarDados(const Dados& dados, bool segunda_unidade) {
     
     delay(1000);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
-    lcd.print(dados.temperatura);
+    if (segunda_unidade) {
+        lcd.print(dados.temperatura.fahrenheit);
+        lcd.print(" F");
+    } else {
+        lcd.print(dados.temperatura.celsius);
+        lcd.print(" C");
+    }
     lcd.setCursor(0, 1);
     lcd.print("Pres: ");
-    lcd.print(dados.pressao);
+    if (segunda_unidade) {
+        lcd.print(dados.pressao.bar);
+        lcd.print(" bar");
+    } else {
+        lcd.print(dados.pressao.atm);
+        lcd.print(" atm");
+    }
 
     delay(1000);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Alt: ");
-    lcd.print(dados.altitude);
+    if (segunda_unidade) {
+        lcd.print(dados.altitude.pes);
+        lcd.print(" ft");
+    } else {
+        lcd.print(dados.altitude.metros);
+        lcd.print(" m");
+    }
     lcd.setCursor(0, 1);
     lcd.print("Lum: ");
-    lcd.print(dados.luminosidade);
+    if (segunda_unidade) {
+        lcd.print(dados.luminosidade.footcandle);
+        lcd.print(" fc");
+    } else {
+        lcd.print(dados.luminosidade.lux);
+        lcd.print(" lux");
+    }
 }
 

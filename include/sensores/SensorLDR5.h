@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino.h>
+#include "modelos/dados.h"
 
 class SensorLDR5 {
     public:
@@ -11,7 +12,7 @@ class SensorLDR5 {
         );
 
         void iniciar();
-        float ler_luminosidade() const;
+        Luminosidade ler_luminosidade() const;
         float ler_media() const;
 
     private:

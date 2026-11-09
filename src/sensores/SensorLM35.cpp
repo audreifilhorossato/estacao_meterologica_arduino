@@ -25,7 +25,11 @@ float SensorLM35::ler_media() const {
     return static_cast<float>(soma) / quantidade_amostras;
 }
 
-float SensorLM35::ler_temperatura() const {
+Temperatura SensorLM35::ler_temperatura() const {
     float leitura = ler_media();
-    return peso * leitura + intercept;
+
+    Temperatura t;
+    t.celsius = peso * leitura + intercept;
+    t.fahrenheit = t.celsius * 9.0f / 5.0f + 32.0f;
+    return t;
 }

@@ -26,9 +26,14 @@ float SensorBMP280::ler_media_pressao() {
     return static_cast<float>(soma / quantidade_amostras);
 }
 
-float SensorBMP280::ler_pressao(){
+Pressao SensorBMP280::ler_pressao(){
     float leitura = ler_media_pressao();
-    return (peso * leitura + intercept) /101325; 
+    float pascal = peso * leitura + intercept;
+
+    Pressao p;
+    p.atm = pascal / 101325.0f;   // 1 atm = 101325 Pa
+    p.bar = pascal / 100000.0f;   // 1 bar = 100000 Pa
+    return p;
 }
 
 float SensorBMP280::ler_media_altitude() {
@@ -42,7 +47,11 @@ float SensorBMP280::ler_media_altitude() {
     return static_cast<float>(soma / quantidade_amostras);
 }
 
-float SensorBMP280::ler_altitude(){
+Altitude SensorBMP280::ler_altitude(){
     float leitura = ler_media_altitude();
-    return (peso * leitura + intercept); 
+
+    Altitude a;
+    a.metros = peso * leitura + intercept;
+    a.pes = a.metros * 3.28084f;   // 1 m = 3,28084 pés
+    return a;
 }

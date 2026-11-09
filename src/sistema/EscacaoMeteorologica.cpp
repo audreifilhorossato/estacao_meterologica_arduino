@@ -2,7 +2,33 @@
 
 // LED de aviso de pouca luz
 constexpr uint8_t PINO_LED = 2;                   // pino digital 2
-constexpr float LIMIAR_LUMINOSIDADE = 100.0f;     // abaixo desse valor o LED acende (ajuste aqui)
+constexpr float LIMIAR_LUMINOSIDADE = 100.0f;     // em lux: abaixo desse valor o LED acende (ajuste aqui)
+
+// Botão que troca as unidades (ligado entre o D1 e o GND)
+constexpr uint8_t PINO_BOTAO = 1;
+
+// false = primeira unidade (°C, atm, m, lux) | true = segunda unidade (°F, bar, pés, fc)
+volatile bool segunda_unidade = false;
+
+// Troca a unidade quando o botão é apertado.
+void ao_apertar_botao() {
+    static unsigned long ultimo_aperto = 0;
+    unsigned long agora = millis();
+
+    if (agora - ultimo_aperto > 250) {   // ignora o "tremido" do botão (debounce)
+        segunda_unidade = !segunda_unidade;
+        ultimo_aperto = agora;
+    }
+}
+
+// Interrupção do D1 (no Uno o D1 fica no grupo PCINT2, pinos D0 a D7).
+// Ela é chamada sozinha quando o pino muda, assim o aperto não se perde
+// mesmo durante os delays do display.
+ISR(PCINT2_vect) {
+    if (digitalRead(PINO_BOTAO) == LOW) {   // LOW = botão apertado
+        ao_apertar_botao();
+    }
+}
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
@@ -69,21 +95,25 @@ void EstacaoMeteorologica::iniciar() {
     pinMode(PINO_LED, OUTPUT);
     digitalWrite(PINO_LED, LOW);
 
+    pinMode(PINO_BOTAO, INPUT_PULLUP);
+    PCICR  |= (1 << PCIE2);     // liga as interrupções do grupo D0 a D7
+    PCMSK2 |= (1 << PCINT17);   // só do pino D1
+
     atualizar_dados();
-    display.mostrarDados(dados);
+    display.mostrarDados(dados, segunda_unidade);
 }
 
 void EstacaoMeteorologica::executar() {
     atualizar_dados();
 
     // acende o LED quando a luminosidade ficar abaixo do limiar
-    if (dados.luminosidade < LIMIAR_LUMINOSIDADE) {
+    if (dados.luminosidade.lux < LIMIAR_LUMINOSIDADE) {
         digitalWrite(PINO_LED, HIGH);
     } else {
         digitalWrite(PINO_LED, LOW);
     }
 
-    display.mostrarDados(dados);
+    display.mostrarDados(dados, segunda_unidade);
 }
 
 void EstacaoMeteorologica::atualizar_dados() {
