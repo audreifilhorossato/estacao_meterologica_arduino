@@ -1,8 +1,8 @@
 #include "sistema/EstacaoMeteorologica.h"
 
 constexpr uint8_t PINO_LED = 2;
-constexpr uint8_t PINO_BOTAO = 1;
-constexpr float LIMIAR_LUMINOSIDADE = 100.0f;
+constexpr uint8_t PINO_BOTAO = 4;
+constexpr float LIMIAR_LUMINOSIDADE = 200.0f;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
@@ -71,16 +71,10 @@ void EstacaoMeteorologica::iniciar() {
     digitalWrite(PINO_LED, LOW);
 
     pinMode(PINO_BOTAO, INPUT_PULLUP);
+
 }
 
 void EstacaoMeteorologica::executar() {
-    atualizar_dados();
-
-    if (dados.luminosidade.lux < LIMIAR_LUMINOSIDADE) {
-        digitalWrite(PINO_LED, HIGH);
-    } else {
-        digitalWrite(PINO_LED, LOW);
-    }
 
     display.mostrarTela1(dados, segunda_unidade);
     esperar(2000);
@@ -97,9 +91,17 @@ void EstacaoMeteorologica::esperar(unsigned long tempo) {
     unsigned long inicio = millis();
 
     while (millis() - inicio < tempo) {
+        atualizar_dados();
+        
         if (digitalRead(PINO_BOTAO) == LOW) {
             segunda_unidade = !segunda_unidade;
             delay(50);
+        }
+
+        if (dados.luminosidade.lux < LIMIAR_LUMINOSIDADE) {
+            digitalWrite(PINO_LED, HIGH);
+        } else {
+            digitalWrite(PINO_LED, LOW);
         }
     }
 }
