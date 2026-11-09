@@ -2,7 +2,7 @@
 
 constexpr uint8_t PINO_LED = 2;
 constexpr uint8_t PINO_BOTAO = 1;
-constexpr float LIMIAR_LUMINOSIDADE = 100.0f;   // lux
+constexpr float LIMIAR_LUMINOSIDADE = 100.0f;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
@@ -92,15 +92,14 @@ void EstacaoMeteorologica::executar() {
     esperar(1000);
 }
 
-// Espera o tempo pedido, mas continua olhando o botao
 void EstacaoMeteorologica::esperar(unsigned long tempo) {
+    
     unsigned long inicio = millis();
 
     while (millis() - inicio < tempo) {
         if (digitalRead(PINO_BOTAO) == LOW) {
             segunda_unidade = !segunda_unidade;
             delay(50);
-            while (digitalRead(PINO_BOTAO) == LOW) {}   // espera soltar o botao
         }
     }
 }

@@ -16,8 +16,7 @@ class SensorLDR5 {
         float ler_media() const;
 
     private:
-        static constexpr float RESISTOR = 10000.0f; 
-        static constexpr float ADC_MAX  = 1023.0f;  
+        static constexpr float RESISTOR = 10000.0f;  
 
         static constexpr float VREF = 1.1f;    
         static constexpr float VCC = 3.3f; 

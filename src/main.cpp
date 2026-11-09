@@ -13,7 +13,6 @@ constexpr float INTERCEPT_LDR5 = 9.97262783;
 constexpr float PESO_DHT22 = 1.305f;
 constexpr float INTERCEPT_DHT22 = -16.6280f;
 
-
 EstacaoMeteorologica estacao(
     A1,                  // LM35
     PESO_LM35,           // LM35

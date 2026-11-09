@@ -11,7 +11,7 @@ bool SensorBMP280::iniciar() {
     if (!bmp.begin(endereco_i2c)) {
         return false; // sensor não respondeu no endereço I2C informado
     }
- 
+
     return true;
 }
 
@@ -19,7 +19,7 @@ float SensorBMP280::ler_media_pressao() {
     double soma = 0;
  
     for (uint16_t i = 0; i < quantidade_amostras; i++) {
-        soma += bmp.readPressure(); // leitura em Pa
+        soma += bmp.readPressure(); 
         delay(2);
     }
  
@@ -40,7 +40,7 @@ float SensorBMP280::ler_media_altitude() {
     double soma = 0;
  
     for (uint16_t i = 0; i < quantidade_amostras; i++) {
-        soma += bmp.readAltitude(1013.25); // leitura em AL
+        soma += bmp.readAltitude(1013.25);
         delay(2);
     }
  

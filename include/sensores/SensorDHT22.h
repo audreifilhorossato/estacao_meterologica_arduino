@@ -13,7 +13,6 @@ class SensorDHT22 {
 
         void iniciar();
         float ler_umidade();
-        float ler_media();
 
     private:
         DHT dht;

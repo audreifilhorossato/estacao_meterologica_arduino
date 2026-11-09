@@ -26,12 +26,12 @@ float SensorLDR5::ler_media() const {
 }
 
 Luminosidade SensorLDR5::ler_luminosidade() const {
-    float tensao = ler_media() * VREF / ADC_MAX;          
+    float tensao = ler_media() * VREF / 1023.0;          
     tensao = constrain(tensao, 0.001f, VREF - 0.001f);    
     float r_ldr = RESISTOR * tensao / (VCC - tensao);     
 
     Luminosidade l;
     l.lux = pow(10, peso * log10(r_ldr) + intercept);
-    l.footcandle = l.lux / 10.764f;
+    l.candle = l.lux / 10.764f;
     return l;
 }

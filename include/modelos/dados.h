@@ -17,7 +17,7 @@ struct Altitude {
 
 struct Luminosidade {
     float lux = 0.0;
-    float footcandle = 0.0;
+    float candle = 0.0;
 };
 
 struct Dados {

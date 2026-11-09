@@ -11,6 +11,7 @@ void LCD::iniciar() {
 }
 
 void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
+
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
@@ -21,6 +22,7 @@ void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
         lcd.print(dados.temperatura.celsius);
         lcd.print(" C");
     }
+
     lcd.setCursor(0, 1);
     lcd.print("Pres: ");
     if (segunda_unidade) {
@@ -33,6 +35,7 @@ void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
 }
 
 void LCD::mostrarTela2(const Dados& dados, bool segunda_unidade) {
+    
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Alt: ");
@@ -43,10 +46,11 @@ void LCD::mostrarTela2(const Dados& dados, bool segunda_unidade) {
         lcd.print(dados.altitude.metros);
         lcd.print(" m");
     }
+
     lcd.setCursor(0, 1);
     lcd.print("Lum: ");
     if (segunda_unidade) {
-        lcd.print(dados.luminosidade.footcandle);
+        lcd.print(dados.luminosidade.candle);
         lcd.print(" fc");
     } else {
         lcd.print(dados.luminosidade.lux);

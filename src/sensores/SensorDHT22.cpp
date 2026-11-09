@@ -12,10 +12,6 @@ void SensorDHT22::iniciar() {
     dht.begin();
 }
 
-float SensorDHT22::ler_media() {
-    return dht.readHumidity();
-}
-
 float SensorDHT22::ler_umidade() {
-    return (peso * ler_media() + intercept);
+    return (peso * dht.readHumidity() + intercept);
 }
