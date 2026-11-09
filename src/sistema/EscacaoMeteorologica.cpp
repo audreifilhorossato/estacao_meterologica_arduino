@@ -83,13 +83,13 @@ void EstacaoMeteorologica::executar() {
     }
 
     display.mostrarTela1(dados, segunda_unidade);
-    esperar(1000);
+    esperar(2000);
 
     display.mostrarTela2(dados, segunda_unidade);
-    esperar(1000);
+    esperar(2000);
 
     display.mostrarTela3(dados);
-    esperar(1000);
+    esperar(2000);
 }
 
 void EstacaoMeteorologica::esperar(unsigned long tempo) {

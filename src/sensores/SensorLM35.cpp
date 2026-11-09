@@ -26,7 +26,8 @@ float SensorLM35::ler_media() const {
 }
 
 Temperatura SensorLM35::ler_temperatura() const {
-    float leitura = ler_media();
+    float tensao = ler_media() * 1.1f / 1023.0f;   // volts (referencia de 1,1 V)
+    float leitura = tensao * 100.0f;               // LM35: 10 mV por grau C
 
     Temperatura t;
     t.celsius = peso * leitura + intercept;
