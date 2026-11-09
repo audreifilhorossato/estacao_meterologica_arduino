@@ -17,10 +17,9 @@ EstacaoMeteorologica::EstacaoMeteorologica(
     float peso_ldr5,
     float intercept_ldr5,
 
-    // DHT22 desativado
-    // uint8_t pino_dht22,
-    // float peso_dht22,
-    // float intercept_dht22,
+    uint8_t pino_dht22,
+    float peso_dht22,
+    float intercept_dht22,
 
     uint16_t quantidade_amostras
 )
@@ -45,12 +44,12 @@ EstacaoMeteorologica::EstacaoMeteorologica(
         quantidade_amostras
       ),
 
-      // sensor_dht22(
-      //   pino_dht22,
-      //   peso_dht22,
-      //   intercept_dht22,
-      //   quantidade_amostras
-      // ),
+      sensor_dht22(
+        pino_dht22,
+        peso_dht22,
+        intercept_dht22,
+        quantidade_amostras
+      ),
 
       display(),
       dados{},
@@ -65,7 +64,7 @@ void EstacaoMeteorologica::iniciar() {
     sensor_lm35.iniciar();
     sensor_bmp280.iniciar();
     sensor_ldr5.iniciar();
-    // sensor_dht22.iniciar();
+    sensor_dht22.iniciar();
     display.iniciar();
 
     pinMode(PINO_LED, OUTPUT);
@@ -88,6 +87,9 @@ void EstacaoMeteorologica::executar() {
 
     display.mostrarTela2(dados, segunda_unidade);
     esperar(1000);
+
+    display.mostrarTela3(dados);
+    esperar(1000);
 }
 
 // Espera o tempo pedido, mas continua olhando o botao
@@ -108,7 +110,7 @@ void EstacaoMeteorologica::atualizar_dados() {
     dados.pressao = sensor_bmp280.ler_pressao();
     dados.altitude = sensor_bmp280.ler_altitude();
     dados.luminosidade = sensor_ldr5.ler_luminosidade();
-    // dados.umidade = sensor_dht22.ler_umidade();
+    dados.umidade = sensor_dht22.ler_umidade();
 }
 
 const Dados& EstacaoMeteorologica::obter_dados() const {

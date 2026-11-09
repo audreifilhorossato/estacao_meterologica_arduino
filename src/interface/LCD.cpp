@@ -54,3 +54,10 @@ void LCD::mostrarTela2(const Dados& dados, bool segunda_unidade) {
     }
 }
 
+void LCD::mostrarTela3(const Dados& dados) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Umid: ");
+    lcd.print(dados.umidade);
+    lcd.print(" %");
+}

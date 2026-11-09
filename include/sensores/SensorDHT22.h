@@ -1,5 +1,3 @@
-// DHT22 desativado
-/*
 #pragma once
 #include <Arduino.h>
 #include <DHT.h> 
@@ -27,4 +25,3 @@ class SensorDHT22 {
         float intercept;
 
 };
-*/

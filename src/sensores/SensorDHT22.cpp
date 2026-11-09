@@ -1,5 +1,3 @@
-// DHT22 desativado
-/*
 #include "sensores/SensorDHT22.h"
 
 SensorDHT22::SensorDHT22(uint8_t pino, float peso, float intercept, uint16_t quantidade_amostras)
@@ -21,4 +19,3 @@ float SensorDHT22::ler_media() {
 float SensorDHT22::ler_umidade() {
     return (peso * ler_media() + intercept);
 }
-*/

@@ -8,4 +8,5 @@ class LCD {
         void iniciar();
         void mostrarTela1(const Dados& dados, bool segunda_unidade);
         void mostrarTela2(const Dados& dados, bool segunda_unidade);
+        void mostrarTela3(const Dados& dados);
 };
