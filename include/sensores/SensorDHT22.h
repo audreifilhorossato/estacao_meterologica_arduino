@@ -7,7 +7,7 @@ class SensorDHT22 {
         SensorDHT22(
             uint8_t pino,
             float peso,
-            float intercept, 
+            float intercept
         );
 
         void iniciar();

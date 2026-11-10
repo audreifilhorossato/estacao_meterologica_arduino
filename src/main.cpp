@@ -23,7 +23,7 @@ EstacaoMeteorologica estacao(
     A0,                  // LDR5
     PESO_LDR5,           // LDR5
     INTERCEPT_LDR5,      // LDR5
-    3,                   // DHT22
+    9,                   // DHT22
     PESO_DHT22,          // DHT22
     INTERCEPT_DHT22,     // DHT22
     20                   // n de amostras

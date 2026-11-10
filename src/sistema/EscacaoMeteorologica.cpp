@@ -2,7 +2,7 @@
 
 constexpr uint8_t PINO_LED = 2;
 constexpr uint8_t PINO_BOTAO = 3;
-constexpr float LIMIAR_LUMINOSIDADE = 200.0f;
+constexpr float LIMIAR_LUMINOSIDADE = 100000.0f;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
@@ -47,8 +47,7 @@ EstacaoMeteorologica::EstacaoMeteorologica(
       sensor_dht22(
         pino_dht22,
         peso_dht22,
-        intercept_dht22,
-        quantidade_amostras
+        intercept_dht22
       ),
 
       display(),
