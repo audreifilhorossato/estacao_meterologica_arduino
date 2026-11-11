@@ -2,7 +2,7 @@
 
 constexpr uint8_t PINO_LED = 2;
 constexpr uint8_t PINO_BOTAO = 3;
-constexpr float LIMIAR_LUMINOSIDADE = 100000.0f;
+constexpr float LIMIAR_LUMINOSIDADE = 150.0f;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     uint8_t pino_lm35,
