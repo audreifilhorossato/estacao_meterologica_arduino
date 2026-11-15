@@ -5,10 +5,10 @@
 class SensorLDR5 {
     public:
         SensorLDR5(
-            uint8_t pino,
+            int pino,
             float peso,
             float intercept, 
-            uint16_t quantidade_amostras = 20
+            int quantidade_amostras = 20
         );
 
         void iniciar();
@@ -21,8 +21,8 @@ class SensorLDR5 {
         static constexpr float VREF = 1.1f;    
         static constexpr float VCC = 3.3f; 
 
-        uint8_t pino;
-        uint16_t quantidade_amostras;
+        int pino;
+        int quantidade_amostras;
 
         float peso;
         float intercept;

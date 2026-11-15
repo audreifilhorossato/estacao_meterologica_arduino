@@ -1,7 +1,7 @@
 
 #include "sensores/SensorLM35.h"
 
-SensorLM35::SensorLM35(uint8_t pino, float peso, float intercept, uint16_t quantidade_amostras)
+SensorLM35::SensorLM35(int pino, float peso, float intercept, int quantidade_amostras)
     : pino(pino),
     quantidade_amostras(quantidade_amostras),
     peso(peso),
@@ -15,9 +15,9 @@ void SensorLM35::iniciar() {
 }
 
 float SensorLM35::ler_media() const {
-    unsigned long soma = 0;
+    long soma = 0; // long: 20 leituras x 1023 quase estoura o int (máx. 32767)
 
-    for (uint16_t i = 0; i < quantidade_amostras; i++) {
+    for (int i = 0; i < quantidade_amostras; i++) {
         soma += analogRead(pino);
         delay(2);
     }
@@ -26,8 +26,8 @@ float SensorLM35::ler_media() const {
 }
 
 Temperatura SensorLM35::ler_temperatura() const {
-    float tensao = ler_media() * 1.1f / 1023.0f;   // volts (referencia de 1,1 V)
-    float leitura = tensao * 100.0f;               // LM35: 10 mV por grau C
+    float tensao = ler_media() * 1.1f / 1023.0f;  
+    float leitura = tensao * 100.0f;              
 
     Temperatura t;
     t.celsius = peso * leitura + intercept;

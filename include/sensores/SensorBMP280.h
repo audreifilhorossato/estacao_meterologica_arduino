@@ -8,10 +8,10 @@
 class SensorBMP280 {
     public:
         SensorBMP280(
-            uint8_t endereco_i2c,
+            int endereco_i2c,
             float peso,
             float intercept, 
-            uint16_t quantidade_amostras = 20
+            int quantidade_amostras = 20
         );
 
         bool iniciar();
@@ -22,8 +22,8 @@ class SensorBMP280 {
     private:
         Adafruit_BMP280 bmp;
 
-        uint8_t endereco_i2c;
-        uint16_t quantidade_amostras;
+        int endereco_i2c;
+        int quantidade_amostras;
 
         float peso;
         float intercept;

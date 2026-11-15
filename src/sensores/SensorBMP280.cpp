@@ -1,6 +1,6 @@
 #include "sensores/SensorBMP280.h"
 
-SensorBMP280::SensorBMP280( uint8_t endereco_i2c, float peso, float intercept, uint16_t quantidade_amostras)
+SensorBMP280::SensorBMP280( int endereco_i2c, float peso, float intercept, int quantidade_amostras)
     : endereco_i2c(endereco_i2c),
     quantidade_amostras(quantidade_amostras),
     peso(peso),
@@ -18,7 +18,7 @@ bool SensorBMP280::iniciar() {
 float SensorBMP280::ler_media_pressao() {
     double soma = 0;
  
-    for (uint16_t i = 0; i < quantidade_amostras; i++) {
+    for (int i = 0; i < quantidade_amostras; i++) {
         soma += bmp.readPressure(); 
         delay(2);
     }
@@ -39,7 +39,7 @@ Pressao SensorBMP280::ler_pressao(){
 float SensorBMP280::ler_media_altitude() {
     double soma = 0;
  
-    for (uint16_t i = 0; i < quantidade_amostras; i++) {
+    for (int i = 0; i < quantidade_amostras; i++) {
         soma += bmp.readAltitude(1013.25);
         delay(2);
     }

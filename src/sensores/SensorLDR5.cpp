@@ -1,7 +1,7 @@
 
 #include "sensores/SensorLDR5.h"
 
-SensorLDR5::SensorLDR5(uint8_t pino, float peso, float intercept, uint16_t quantidade_amostras)
+SensorLDR5::SensorLDR5(int pino, float peso, float intercept, int quantidade_amostras)
     : pino(pino),
     quantidade_amostras(quantidade_amostras),
     peso(peso),
@@ -15,9 +15,9 @@ void SensorLDR5::iniciar() {
 }
 
 float SensorLDR5::ler_media() const {
-    unsigned long soma = 0;
+    long soma = 0; // long: 20 leituras x 1023 quase estoura o int (máx. 32767)
 
-    for (uint16_t i = 0; i < quantidade_amostras; i++) {
+    for (int i = 0; i < quantidade_amostras; i++) {
         soma += analogRead(pino);
         delay(2);
     }
@@ -26,8 +26,7 @@ float SensorLDR5::ler_media() const {
 }
 
 Luminosidade SensorLDR5::ler_luminosidade() const {
-    float tensao = ler_media() * VREF / 1023.0;          
-    tensao = constrain(tensao, 0.001f, VREF - 0.001f);    
+    float tensao = ler_media() * VREF / 1024.0;     
     float r_ldr = RESISTOR * tensao / (VCC - tensao);     
 
     Luminosidade l;

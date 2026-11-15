@@ -1,27 +1,27 @@
 #include "sistema/EstacaoMeteorologica.h"
 
-constexpr uint8_t PINO_LED = 2;
-constexpr uint8_t PINO_BOTAO = 3;
+constexpr int PINO_LED = 2;
+constexpr int PINO_BOTAO = 3;
 constexpr float LIMIAR_LUMINOSIDADE = 150.0f;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
-    uint8_t pino_lm35,
+    int pino_lm35,
     float peso_lm35,
     float intercept_lm35,
 
-    uint8_t endereco_i2c,
+    int endereco_i2c,
     float peso_bmp280,
     float intercept_bmp280,
 
-    uint8_t pino_ldr5,
+    int pino_ldr5,
     float peso_ldr5,
     float intercept_ldr5,
 
-    uint8_t pino_dht22,
+    int pino_dht22,
     float peso_dht22,
     float intercept_dht22,
 
-    uint16_t quantidade_amostras
+    int quantidade_amostras
 )
     :sensor_lm35(
         pino_lm35,
@@ -65,6 +65,7 @@ void EstacaoMeteorologica::iniciar() {
     sensor_ldr5.iniciar();
     sensor_dht22.iniciar();
     display.iniciar();
+    display.mostrarIntegrantes(); // roda só uma vez, porque iniciar() é chamado no setup()
 
     pinMode(PINO_LED, OUTPUT);
     digitalWrite(PINO_LED, LOW);
@@ -85,9 +86,9 @@ void EstacaoMeteorologica::executar() {
     esperar(2000);
 }
 
-void EstacaoMeteorologica::esperar(unsigned long tempo) {
+void EstacaoMeteorologica::esperar(int tempo) {
     
-    unsigned long inicio = millis();
+    unsigned long inicio = millis(); // millis() devolve unsigned long, int estouraria em 32 s
 
     while (millis() - inicio < tempo) {
         atualizar_dados();

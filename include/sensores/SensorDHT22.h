@@ -5,7 +5,7 @@
 class SensorDHT22 {
     public:
         SensorDHT22(
-            uint8_t pino,
+            int pino,
             float peso,
             float intercept
         );
@@ -16,7 +16,7 @@ class SensorDHT22 {
     private:
         DHT dht;
 
-        uint8_t pino;
+        int pino;
 
         float peso;
         float intercept;

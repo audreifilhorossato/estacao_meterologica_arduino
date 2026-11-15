@@ -13,23 +13,23 @@
 class EstacaoMeteorologica {
     public:
         EstacaoMeteorologica(
-            uint8_t pino_lm35,
+            int pino_lm35,
             float peso_lm35,
             float intercept_lm35,
 
-            uint8_t endereco_i2c,
+            int endereco_i2c,
             float peso_bmp280,
             float intercept_bmp280,
 
-            uint8_t pino_ldr5,
+            int pino_ldr5,
             float peso_ldr5,
             float intercept_ldr5,
 
-            uint8_t pino_dht22,
+            int pino_dht22,
             float peso_dht22,
             float intercept_dht22,
 
-            uint16_t quantidade_amostras = 20
+            int quantidade_amostras = 20
         );
 
         void iniciar();
@@ -48,5 +48,5 @@ class EstacaoMeteorologica {
         bool segunda_unidade;
 
         void atualizar_dados();
-        void esperar(unsigned long tempo);
+        void esperar(int tempo);
 };
