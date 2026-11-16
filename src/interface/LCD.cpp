@@ -10,14 +10,14 @@ void LCD::iniciar() {
     lcd.clear();
 }
 
-// Tela de apresentação: mostra os integrantes do grupo uma vez só, no início.
+
 void LCD::mostrarIntegrantes() {
     lcd.clear();
-    lcd.setCursor(0, 0);          // coluna 0, linha 0 (linha de cima)
-    lcd.print("Audrei Guilherme"); // 16 caracteres, cabe certinho na linha
-    lcd.setCursor(0, 1);          // coluna 0, linha 1 (linha de baixo)
-    lcd.print("Gabriel");
-    delay(3000);                  // deixa os nomes na tela por 3 segundos
+    lcd.setCursor(0, 0);          
+    lcd.print("Audrei, Guilherme"); 
+    lcd.setCursor(0, 1);          
+    lcd.print("e Gabriel");
+    delay(3000);                 
 }
 
 void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
