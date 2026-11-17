@@ -65,7 +65,7 @@ void EstacaoMeteorologica::iniciar() {
     sensor_ldr5.iniciar();
     sensor_dht22.iniciar();
     display.iniciar();
-    display.mostrarIntegrantes(); // roda só uma vez, porque iniciar() é chamado no setup()
+    display.mostrarIntegrantes(); 
 
     pinMode(PINO_LED, OUTPUT);
     digitalWrite(PINO_LED, LOW);
