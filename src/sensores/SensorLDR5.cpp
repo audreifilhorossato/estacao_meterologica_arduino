@@ -11,26 +11,26 @@ SensorLDR5::SensorLDR5(int pino, float peso, float intercept, int quantidade_amo
 void SensorLDR5::iniciar() {
 
     pinMode(pino, INPUT);
-    analogRead(pino); //só para eliminar a primeira leitura não confiavel
+    analogRead(pino); 
 }
 
 float SensorLDR5::ler_media() const {
-    long soma = 0; // long: 20 leituras x 1023 quase estoura o int (máx. 32767)
+    float soma = 0; 
 
     for (int i = 0; i < quantidade_amostras; i++) {
         soma += analogRead(pino);
         delay(2);
     }
 
-    return static_cast<float>(soma) / quantidade_amostras;
+    return soma / quantidade_amostras;
 }
 
 Luminosidade SensorLDR5::ler_luminosidade() const {
-    float tensao = ler_media() * VREF / 1024.0;     
-    float r_ldr = RESISTOR * tensao / (VCC - tensao);     
+    float tensao = ler_media() * 1.1 / 1024.0;     
+    float r_ldr = RESISTOR * tensao / (3.3 - tensao);     
 
     Luminosidade l;
     l.lux = pow(10, peso * log10(r_ldr) + intercept);
-    l.candle = l.lux / 10.764f;
+    l.candle = l.lux / 10.764;
     return l;
 }

@@ -1,25 +1,20 @@
 #include <Arduino.h>
 #include "sistema/EstacaoMeteorologica.h"
 
-constexpr float PESO_LM35 = 1.0;
-constexpr float INTERCEPT_LM35 = 0.0;
+const float PESO_LM35 = 0.9908;
+const float INTERCEPT_LM35 = -0.75;
 
-constexpr float PESO_BMP280 = 1.0;
-constexpr float INTERCEPT_BMP280 = 0.0;
+const float PESO_LDR5 = -2.36173795;
+const float INTERCEPT_LDR5 = 9.97262783;
 
-constexpr float PESO_LDR5 = -2.0;
-constexpr float INTERCEPT_LDR5 = 9.0;
-
-constexpr float PESO_DHT22 = 1.0;
-constexpr float INTERCEPT_DHT22 = 0.0;
+const float PESO_DHT22 = 1.302407;
+const float INTERCEPT_DHT22 = -17.013343;
 
 EstacaoMeteorologica estacao(
     A1,                  // LM35
     PESO_LM35,           // LM35
     INTERCEPT_LM35,      // LM35
     0x76,                // BMP280
-    PESO_BMP280,         // BMP280
-    INTERCEPT_BMP280,    // BMP280
     A0,                  // LDR5
     PESO_LDR5,           // LDR5
     INTERCEPT_LDR5,      // LDR5

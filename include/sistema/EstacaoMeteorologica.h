@@ -18,9 +18,7 @@ class EstacaoMeteorologica {
             float intercept_lm35,
 
             int endereco_i2c,
-            float peso_bmp280,
-            float intercept_bmp280,
-
+            
             int pino_ldr5,
             float peso_ldr5,
             float intercept_ldr5,

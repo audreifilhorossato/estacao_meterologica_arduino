@@ -1,8 +1,8 @@
 #include "sistema/EstacaoMeteorologica.h"
 
-constexpr int PINO_LED = 2;
-constexpr int PINO_BOTAO = 3;
-constexpr float LIMIAR_LUMINOSIDADE = 150.0f;
+const int PINO_LED = 2;
+const int PINO_BOTAO = 3;
+const float LIMIAR_LUMINOSIDADE = 400.0;
 
 EstacaoMeteorologica::EstacaoMeteorologica(
     int pino_lm35,
@@ -10,8 +10,6 @@ EstacaoMeteorologica::EstacaoMeteorologica(
     float intercept_lm35,
 
     int endereco_i2c,
-    float peso_bmp280,
-    float intercept_bmp280,
 
     int pino_ldr5,
     float peso_ldr5,
@@ -32,8 +30,6 @@ EstacaoMeteorologica::EstacaoMeteorologica(
 
       sensor_bmp280(
         endereco_i2c,
-        peso_bmp280,
-        intercept_bmp280,
         quantidade_amostras
       ),
 
@@ -65,12 +61,14 @@ void EstacaoMeteorologica::iniciar() {
     sensor_ldr5.iniciar();
     sensor_dht22.iniciar();
     display.iniciar();
-    display.mostrarIntegrantes(); 
 
     pinMode(PINO_LED, OUTPUT);
     digitalWrite(PINO_LED, LOW);
 
     pinMode(PINO_BOTAO, INPUT_PULLUP);
+
+    display.mostrarCapa(); 
+    esperar(2000);
 
 }
 
@@ -88,13 +86,14 @@ void EstacaoMeteorologica::executar() {
 
 void EstacaoMeteorologica::esperar(int tempo) {
     
-    unsigned long inicio = millis(); // millis() devolve unsigned long, int estouraria em 32 s
-
+    unsigned long inicio = millis(); 
+    bool botao = true;
     while (millis() - inicio < tempo) {
         atualizar_dados();
         
-        if (digitalRead(PINO_BOTAO) == LOW) {
+        if (digitalRead(PINO_BOTAO) == LOW && botao) {
             segunda_unidade = !segunda_unidade;
+            botao = false;
             delay(50);
         }
 

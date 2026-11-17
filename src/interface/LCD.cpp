@@ -4,20 +4,45 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
+
+
 void LCD::iniciar() {
     lcd.init();
+    lcd.createChar(0, grau);
+    lcd.createChar(1, carinha);
+    lcd.createChar(2, cedilha);
+    lcd.createChar(3, a_til);
     lcd.backlight();
     lcd.clear();
 }
 
-
-void LCD::mostrarIntegrantes() {
+void:: LCD::mostrarCapa() {
     lcd.clear();
     lcd.setCursor(0, 0);          
-    lcd.print("Audrei, Guilherme"); 
+    lcd.print("Instrumenta");
+    lcd.write(byte(2));
+    lcd.write(byte(3));
+    lcd.print("o e"); 
     lcd.setCursor(0, 1);          
-    lcd.print("e Gabriel");
-    delay(3000);                 
+    lcd.print("Medi");
+    lcd.write(byte(2));
+    lcd.write(byte(3));
+    lcd.print("o"); 
+    delay(3000);
+
+    lcd.clear();
+    lcd.setCursor(0, 0);          
+    lcd.print("Grupo Amarelo"); 
+    lcd.setCursor(0, 1);          
+    lcd.print("2026");
+    delay(3000);
+
+    lcd.clear();
+    lcd.setCursor(0, 0);          
+    lcd.print("Audrei, Gabriel"); 
+    lcd.setCursor(0, 1);          
+    lcd.print("e Guilherme ");
+    lcd.write(byte(1));
 }
 
 void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
@@ -27,9 +52,11 @@ void LCD::mostrarTela1(const Dados& dados, bool segunda_unidade) {
     lcd.print("Temp: ");
     if (segunda_unidade) {
         lcd.print(dados.temperatura.fahrenheit);
+        lcd.write(byte(0));
         lcd.print(" F");
     } else {
         lcd.print(dados.temperatura.celsius);
+        lcd.write(byte(0));
         lcd.print(" C");
     }
 
@@ -61,10 +88,10 @@ void LCD::mostrarTela2(const Dados& dados, bool segunda_unidade) {
     lcd.print("Lum: ");
     if (segunda_unidade) {
         lcd.print(dados.luminosidade.candle);
-        lcd.print(" fc");
+        lcd.print(" cd");
     } else {
         lcd.print(dados.luminosidade.lux);
-        lcd.print(" lux");
+        lcd.print(" lx");
     }
 }
 

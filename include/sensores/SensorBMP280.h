@@ -9,8 +9,6 @@ class SensorBMP280 {
     public:
         SensorBMP280(
             int endereco_i2c,
-            float peso,
-            float intercept, 
             int quantidade_amostras = 20
         );
 
@@ -19,13 +17,11 @@ class SensorBMP280 {
         Altitude ler_altitude();
         float ler_media_pressao();
         float ler_media_altitude();
+        
     private:
         Adafruit_BMP280 bmp;
 
         int endereco_i2c;
         int quantidade_amostras;
-
-        float peso;
-        float intercept;
 
 };

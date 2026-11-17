@@ -16,10 +16,7 @@ class SensorLDR5 {
         float ler_media() const;
 
     private:
-        static constexpr float RESISTOR = 10000.0f;  
-
-        static constexpr float VREF = 1.1f;    
-        static constexpr float VCC = 3.3f; 
+        const float RESISTOR = 10000.0;  
 
         int pino;
         int quantidade_amostras;
